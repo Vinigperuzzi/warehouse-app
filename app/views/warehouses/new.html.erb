@@ -1,0 +1,35 @@
+<h1>Novo Galpão</h1>
+
+<%= form_with(model: Warehouse.new) do |f|%>
+  <div>
+    <%= f.label :name, 'Nome' %>
+    <%= f.text_field :name%>
+  </div>
+  <div>
+    <%= f.label :description, 'Descrição' %>
+    <%= f.text_area :description%>
+  </div>
+  <div>
+    <%= f.label :code, 'Código' %>
+    <%= f.text_field :code%>
+  </div>
+  <div>
+    <%= f.label :address, 'Endereço' %>
+    <%= f.text_field :address%>
+  </div>
+  <div>
+    <%= f.label :city, 'Cidade' %>
+    <%= f.text_field :city%>
+  </div>
+  <div>
+    <%= f.label :cep, 'CEP' %>
+    <%= f.text_field :cep%>
+  </div>
+  <div>
+    <%= f.label :area, 'Área' %>
+    <%= f.number_field :area%>
+  </div>
+  <div>
+    <%= f.submit 'Enviar'%>
+  </div>
+<% end %>
