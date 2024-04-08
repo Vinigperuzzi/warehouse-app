@@ -1,0 +1,33 @@
+<%= form_with(model: @warehouse) do |f|%>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name%>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description%>
+  </div>
+  <div>
+    <%= f.label :code %>
+    <%= f.text_field :code%>
+  </div>
+  <div>
+    <%= f.label :address %>
+    <%= f.text_field :address%>
+  </div>
+  <div>
+    <%= f.label :city %>
+    <%= f.text_field :city%>
+  </div>
+  <div>
+    <%= f.label :cep %>
+    <%= f.text_field :cep%>
+  </div>
+  <div>
+    <%= f.label :area %>
+    <%= f.number_field :area%>
+  </div>
+  <div>
+    <%= f.submit 'Enviar'%>
+  </div>
+<% end %>
