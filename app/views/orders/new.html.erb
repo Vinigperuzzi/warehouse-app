@@ -1,0 +1,17 @@
+<h1>Registrar Pedido</h1>
+
+<%= form_with(model: @order) do |f| %>
+  <div>
+    <%= f.label :warehouse_id, 'Galpão Destino' %>
+    <%= f.collection_select :warehouse_id, @warehouses, :id, :name%>
+  </div>
+  <div>
+    <%= f.label :supplier_id, 'Fornecedor' %>
+    <%= f.collection_select :supplier_id, @suppliers, :id, :corporate_name%>
+  </div>
+  <div>
+    <%= f.label :estimated_delivery_date, 'Data Prevista de Entrega'%>
+    <%= f.text_field :estimated_delivery_date %>
+  </div>
+  <%= f.submit 'Gravar'%>
+<% end %>

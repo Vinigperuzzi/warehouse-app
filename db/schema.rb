@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_222025) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_12_021225) do
+  create_table "orders", force: :cascade do |t|
+    t.integer "warehouse_id", null: false
+    t.integer "supplier_id", null: false
+    t.integer "user_id", null: false
+    t.date "estimated_delivery_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_orders_on_supplier_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["warehouse_id"], name: "index_orders_on_warehouse_id"
+  end
+
   create_table "product_models", force: :cascade do |t|
     t.string "name"
     t.integer "weight"
@@ -61,5 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_222025) do
     t.string "description"
   end
 
+  add_foreign_key "orders", "suppliers"
+  add_foreign_key "orders", "users"
+  add_foreign_key "orders", "warehouses"
   add_foreign_key "product_models", "suppliers"
 end
