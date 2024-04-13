@@ -18,6 +18,7 @@ describe 'Usuário cadastra um pedido' do
     warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
                                   address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
                                   description: 'Galpão destinado para cargas internacionais')
+    allow(SecureRandom).to receive(:alphanumeric).and_return('ABC12345')
 
     login_as(user)
     visit root_path
@@ -28,6 +29,7 @@ describe 'Usuário cadastra um pedido' do
     click_on 'Gravar'
 
     expect(page).to have_content 'Pedido registrado com sucesso'
+    expect(page).to have_content 'Pedido ABC12345'
     expect(page).to have_content 'Galpão Destino: GRU - Aeroporto SP'
     expect(page).to have_content 'Fornecedor: ACME - ACME LTDA - 4344721600102'
     expect(page).to have_content 'Data Prevista de Entrega: 20/12/2022'
