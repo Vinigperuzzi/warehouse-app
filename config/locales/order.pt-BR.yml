@@ -1,7 +1,9 @@
 pt-BR:
   activerecord:
     models:
-      order: 'Pedido'
+      order: 
+        one: 'Pedido'
+        other: 'Pedidos'
     attributes:
       order:
         warehouse_id: "Galpão Destino"
@@ -11,6 +13,7 @@ pt-BR:
         estimated_delivery_date: "Data Prevista de Entrega"
         user_id: "Usuário Responsável"
         user: "Usuário Responsável"
+        code: 'Código'
 
 
 

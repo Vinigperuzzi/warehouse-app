@@ -6,7 +6,7 @@ describe 'Usuário se autentica' do
 
     visit root_path
     click_on 'Entrar'
-    within('form') do
+    within('main form') do
       fill_in 'E-mail', with: 'vinicius@email.com'
       fill_in 'Senha', with: 'password'
       click_on 'Entrar'
@@ -27,7 +27,7 @@ describe 'Usuário se autentica' do
     click_on 'Entrar'
     fill_in 'E-mail', with: 'vinicius@email.com'
     fill_in 'Senha', with: 'password'
-    within('form') do
+    within('main form') do
       click_on 'Entrar'
     end
     click_on 'Sair'

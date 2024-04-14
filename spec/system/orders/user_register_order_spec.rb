@@ -25,16 +25,35 @@ describe 'Usuário cadastra um pedido' do
     click_on 'Registrar Pedido'
     select 'GRU - Aeroporto SP', from: 'Galpão Destino'
     select 'ACME - ACME LTDA - 4344721600102', from: 'Fornecedor'
-    fill_in 'Data Prevista de Entrega', with: '20/12/2022'
+    fill_in 'Data Prevista de Entrega', with: 1.day.from_now
     click_on 'Gravar'
 
     expect(page).to have_content 'Pedido registrado com sucesso'
     expect(page).to have_content 'Pedido ABC12345'
     expect(page).to have_content 'Galpão Destino: GRU - Aeroporto SP'
     expect(page).to have_content 'Fornecedor: ACME - ACME LTDA - 4344721600102'
-    expect(page).to have_content 'Data Prevista de Entrega: 20/12/2022'
+    expect(page).to have_content "Data Prevista de Entrega: #{1.day.from_now.strftime('%d/%m/%Y')}"
     expect(page).to have_content 'Usuário Responsável: Vinícius - vinicius@email.com'
     expect(page).not_to have_content 'Galpão Maceio'
     expect(page).not_to have_content 'Spark Industries Brasil LTDA'
+  end
+
+  it 'e não informa a data de entrega' do
+    warehouse = Warehouse.create!(name: 'Rio de Janeiro', code: 'RIO', address: 'Endereço', cep: '25000-000', city: 'Rio', area: 1000, description: 'Alguma descrição')
+    user = User.create!(email: 'vinicius@email.com', password: 'password', name: 'Vinícius')
+    supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '4344721600102', full_address: 'Av das Palmas, 100',
+                                city: 'Bauru', state: 'SP', email: 'contato@acme.com')
+    allow(SecureRandom).to receive(:alphanumeric).and_return('ABC12345')
+    
+    login_as(user)
+    visit root_path
+    click_on 'Registrar Pedido'
+    select 'RIO - Rio de Janeiro', from: 'Galpão Destino'
+    select 'ACME - ACME LTDA - 4344721600102', from: 'Fornecedor'
+    fill_in 'Data Prevista de Entrega', with: ''
+    click_on 'Gravar'
+
+    expect(page).to have_content 'Não foi possível registrar o pedido.'
+    expect(page).to have_content 'Data Prevista de Entrega não pode ficar em branco'
   end
 end
