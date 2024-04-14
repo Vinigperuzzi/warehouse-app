@@ -32,7 +32,8 @@ describe 'Usuário cadastra um pedido' do
     expect(page).to have_content 'Pedido ABC12345'
     expect(page).to have_content 'Galpão Destino: GRU - Aeroporto SP'
     expect(page).to have_content 'Fornecedor: ACME - ACME LTDA - 4344721600102'
-    expect(page).to have_content "Data Prevista de Entrega: #{1.day.from_now.strftime('%d/%m/%Y')}"
+    formatted_date = I18n.localize(1.day.from_now.to_date)
+    expect(page).to have_content "Data Prevista de Entrega: #{formatted_date}"
     expect(page).to have_content 'Usuário Responsável: Vinícius - vinicius@email.com'
     expect(page).not_to have_content 'Galpão Maceio'
     expect(page).not_to have_content 'Spark Industries Brasil LTDA'
