@@ -35,6 +35,7 @@ describe 'Usuário cadastra um pedido' do
     formatted_date = I18n.localize(1.day.from_now.to_date)
     expect(page).to have_content "Data Prevista de Entrega: #{formatted_date}"
     expect(page).to have_content 'Usuário Responsável: Vinícius - vinicius@email.com'
+    expect(page).to have_content 'Situação do Pedido: Pendente'
     expect(page).not_to have_content 'Galpão Maceio'
     expect(page).not_to have_content 'Spark Industries Brasil LTDA'
   end
