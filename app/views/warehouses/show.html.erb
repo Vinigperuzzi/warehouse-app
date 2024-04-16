@@ -13,5 +13,12 @@
 </div>
 
 <div>
+  <h2>Itens em Estoque</h2>
+  <% @stocks.each_pair do |product_model, quantity| %>
+    <%= quantity %> x <%= product_model.sku %>
+  <% end %>
+</div>
+
+<div>
   <%= link_to 'Voltar a home', root_path%>
 </div>
