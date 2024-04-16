@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_16_053815) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_162127) do
   create_table "order_items", force: :cascade do |t|
     t.integer "product_model_id", null: false
     t.integer "order_id", null: false
@@ -46,6 +46,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_053815) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["supplier_id"], name: "index_product_models_on_supplier_id"
+  end
+
+  create_table "stock_product_destinations", force: :cascade do |t|
+    t.integer "stock_product_id", null: false
+    t.string "address"
+    t.string "recipent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_product_id"], name: "index_stock_product_destinations_on_stock_product_id"
   end
 
   create_table "stock_products", force: :cascade do |t|
@@ -103,6 +112,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_053815) do
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "warehouses"
   add_foreign_key "product_models", "suppliers"
+  add_foreign_key "stock_product_destinations", "stock_products"
   add_foreign_key "stock_products", "orders"
   add_foreign_key "stock_products", "product_models"
   add_foreign_key "stock_products", "warehouses"

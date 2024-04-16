@@ -12,12 +12,35 @@
   <%= button_to 'Remover', warehouse_path(@warehouse), method: :delete%>
 </div>
 
-<div>
-  <h2>Itens em Estoque</h2>
-  <% @stocks.each_pair do |product_model, quantity| %>
-    <%= quantity %> x <%= product_model.sku %>
-  <% end %>
-</div>
+<section id="stock_products">
+  <div>
+    <h2>Itens em Estoque</h2>
+    <% @stocks.each_pair do |product_model, quantity| %>
+      <%= quantity %> x <%= product_model.sku %>
+    <% end %>
+  </div>
+</section>
+
+<section id="stock_destination">
+  <div>
+    <h2>Saída de Estoque</h2>
+    <%= form_with(url: warehouse_stock_product_destinations_path(@warehouse.id)) do |f| %>
+    <div>
+      <%= f.label(:product_model_id, 'Item para Saída') %>
+      <%= f.collection_select(:product_model_id, @product_models, :id, :sku) %>
+    </div>
+    <div>
+      <%= f.label(:recipient, 'Destinatário') %>
+      <%= f.text_field(:recipient) %>
+    </div>
+    <div>
+      <%= f.label(:address, 'Endereço Destino') %>
+      <%= f.text_field(:address) %>
+    </div>
+    <%= f.submit "Confirmar Retirada" %>
+    <% end %>
+  </div>
+</section>
 
 <div>
   <%= link_to 'Voltar a home', root_path%>
