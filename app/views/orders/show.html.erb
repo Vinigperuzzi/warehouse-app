@@ -13,6 +13,12 @@
   <dd><%= @order.user.description%></dd> 
 </dl>
 
+<h2>Itens do Pedido</h2>
+
+<% @order.order_items.each do |item| %>
+  <p><%= item.quantity %> x <%= item.product_model.name %></p>
+<% end %>
+
 <% if @order.pending?%>
   <%= button_to 'Marcar como ENTREGUE', delivered_order_path(@order.id) %>
   <%= button_to 'Marcar como CANCELADO', canceled_order_path(@order.id) %>
