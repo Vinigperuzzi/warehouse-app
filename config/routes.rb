@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "home#index"
+  root to: "home#index" 
   resources :warehouses, only: [:show, :new, :create, :edit, :update, :destroy] do
     resources :stock_product_destinations, only: [:create]
   end
@@ -13,6 +13,12 @@ Rails.application.routes.draw do
     member do
       post 'delivered'
       post 'canceled'
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :warehouses, only: [:show, :index, :create]
     end
   end
 end
